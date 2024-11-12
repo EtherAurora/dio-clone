@@ -3,7 +3,6 @@ import { MdEmail, MdLock, MdPerson } from 'react-icons/md'
 import { Button } from '../../components/Button';
 import { Header } from '../../components/Header';
 import { Input } from '../../components/Input';
-import { api } from '../../services/api';
 
 import { useForm } from "react-hook-form";
 
@@ -25,20 +24,8 @@ const SignIn = () => {
         mode: 'onChange',
     });
 
-    const onSubmit = async (formData) => {
-        try{
-            const {data} = await api.get(`/users?name=${formData.name}&users?email=${formData.email}&senha=${formData.senha}`);
-            
-            if(data.length && data[0].id){
-                navigate('/feed') 
-                return
-            }
-
-            alert('Usuário ou senha inválido')
-        }catch(e){
-            // eslint-disable-next-line no-useless-concat
-            alert("Um erro ocorreu, por favor tente novamente." + " " + e);
-        }
+    const onSubmit = () => {
+        navigate('/feed');
     };
 
     console.log('errors', errors);
